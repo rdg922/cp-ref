@@ -1,0 +1,28 @@
+name: Compile LaTeX to PDF
+
+on:
+  push:
+    branches:
+      - main  # Adjust branch name if necessary
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Adjust Python version if necessary
+
+    - name: Run build_latex.py
+      run: python build_latex.py
+
+    - name: Upload PDF as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: compiled-pdf
+        path: pdf/compiled_document.pdf  # Adjust path to your compiled PDF
